@@ -11,8 +11,6 @@
 |
 */
 
-use App\Http\Controllers\ProductController;
-
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -24,4 +22,8 @@ Route::get('/product', 'ProductController@index');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('home', 'AdminController@index');
     Route::get('admin/job-approve/{id}', 'AdminController@approve');
+
+    Route::get('dataTablesProducts', 'Admin\DataTableController@getProducts');
+    // Products
+    Route::resource('products', 'Admin\ProductController');
 });

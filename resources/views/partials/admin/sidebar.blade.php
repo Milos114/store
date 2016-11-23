@@ -11,12 +11,13 @@
             <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_document_alt"></i>
-                    <span>Forms</span>
+                    <span>Products</span>
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
-                    <li><a class="" href="form_component.html">Form Elements</a></li>
-                    <li><a class="" href="form_validation.html">Form Validation</a></li>
+                    <li><a class="" href="/admin/products">List Product</a></li>
+                    <li><a class="" href="form_component.html">Create Product</a></li>
+                    <li><a class="" href="form_validation.html">Edit Product</a></li>
                 </ul>
             </li>
             <li class="sub-menu">

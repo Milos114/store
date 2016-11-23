@@ -8,7 +8,7 @@
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="{{asset('admin/img/favicon.png')}}">
 
-    <title>Board Admin</title>
+    <title>Admin Store</title>
 
     <!-- bootstrap theme -->
     <link href="{{asset('admin/css/bootstrap-theme.css')}}" rel="stylesheet">
@@ -23,6 +23,8 @@
     <link href="{{asset('admin/css/style-responsive.css')}}" rel="stylesheet" />
     <link href="{{asset('admin/css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">
 
+    <!-- DataTables styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
 
 </head>
 
