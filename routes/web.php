@@ -11,14 +11,14 @@
 |
 */
 
+use App\Http\Controllers\ProductController;
+
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/product', function () {
-    return view('products.show');
-});
+Route::get('/product', 'ProductController@index');
 
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
