@@ -15,12 +15,10 @@ class DataTableController extends Controller
 
         return Datatables::of($products)
             ->addColumn('edit', function ($product) {
-                return '<a href="/admin/products/' . $product->id . '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                return '<a href="/admin/product/' . $product->id . '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             })->addColumn('delete', function ($product) {
-                return '<a href="/admin/products/' . $product->id . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-delete"></i> Delete</a>';
+                return '<a href="/admin/product/' . $product->id . '/delete" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-delete"></i> Delete</a>';
             })
-            ->editColumn('id', 'ID: {{$id}}')
-            ->removeColumn('password')
             ->make(true);
     }
 }

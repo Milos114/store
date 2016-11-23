@@ -83,6 +83,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-       return dd('destro');
+       return 'fdsf';
     }
 }

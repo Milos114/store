@@ -14,7 +14,7 @@
 
         <div class="content">
             <div class="btn-group pull-right">
-                <a href="{{route('products.create')}}">
+                <a href="{{url('Admin\ProductController@create')}}">
                     <button type="button" class="btn btn-success">Add new student</button>
                 </a>
             </div>

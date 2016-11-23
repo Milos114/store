@@ -169,6 +169,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
         //
 

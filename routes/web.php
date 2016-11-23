@@ -23,7 +23,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('home', 'AdminController@index');
     Route::get('admin/job-approve/{id}', 'AdminController@approve');
 
+    // DataTables
     Route::get('dataTablesProducts', 'Admin\DataTableController@getProducts');
+
     // Products
-    Route::resource('products', 'Admin\ProductController');
+    Route::get('products', 'Admin\ProductController@index');
+    Route::get('product/create', 'Admin\ProductController@create');
+    Route::get('product/{product}/edit', 'Admin\ProductController@edit');
+    Route::post('product/{product}', 'Admin\ProductController@update');
+    Route::get('product/{product}', 'Admin\ProductController@show');
+    Route::get('product/{product}/delete', 'Admin\ProductController@destroy');
 });
