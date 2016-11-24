@@ -61,10 +61,11 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categoryForProduct = $product->category()->first();
+        $tagsForProduct = $product->tags;
         $categories = Category::all();
         $tags = Tag::all();
 
-        return view('admin.product.edit', compact('product', 'categories', 'categoryForProduct', 'tags'));
+        return view('admin.product.edit', compact('product', 'categories', 'categoryForProduct', 'tags', 'tagsForProduct'));
     }
 
     /**

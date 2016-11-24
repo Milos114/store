@@ -42,20 +42,12 @@
                     @foreach($tags as $tag)
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags">
+                                <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags" {{$tagsForProduct->contains($tag) ? 'checked' : ''}}>
                                 {{$tag->name}}
                             </label>
                         </div>
                     @endforeach
                 </div>
-
-                {{--<div class="form-group">--}}
-                    {{--@foreach($tags as $tag)--}}
-                        {{--<div>--}}
-                            {{--{{$tag->name}}<input type="checkbox" class="form-control" value="{{$tag->id}}">--}}
-                        {{--</div>--}}
-                    {{--@endforeach--}}
-                {{--</div>--}}
 
                 <button type="submit" class="btn btn-primary pull-right">Save</button>
             </form>
