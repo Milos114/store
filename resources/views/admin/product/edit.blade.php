@@ -8,7 +8,7 @@
                     <label for="category">Category:</label>
                     <select name="category" class="form-control">
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}" {{$categoryForProduct == $category ? 'selected' : ''}}>{{$category->name}}</option>
+                            <option value="{{$category->id}}" {{$product->category->id == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -42,7 +42,7 @@
                     @foreach($tags as $tag)
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags" {{$tagsForProduct->contains($tag) ? 'checked' : ''}}>
+                                <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags" {{$product->tags->contains($tag) ? 'checked' : ''}}>
                                 {{$tag->name}}
                             </label>
                         </div>
