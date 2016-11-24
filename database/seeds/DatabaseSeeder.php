@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(TagsTableSeeder::class);
 //        $this->call(JobTagTableSeeder::class);
         $this->call(CustomUsersSeeder::class);
+        $this->call(ProductTableSeeder::class);
     }
 }
