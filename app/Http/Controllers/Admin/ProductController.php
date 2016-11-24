@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Product;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products');
+        return view('admin.product.index');
     }
 
     /**
@@ -53,12 +55,16 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        return dd($id);
+        $categoryForProduct = $product->category()->first();
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('admin.product.edit', compact('product', 'categories', 'categoryForProduct', 'tags'));
     }
 
     /**

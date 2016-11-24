@@ -12,7 +12,7 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
         factory(App\Category::class, 10)->create()->each(function ($u) {
-            $u->product()->saveMany(factory(App\Product::class, 3)->make());
+            $u->products()->saveMany(factory(App\Product::class, 3)->make());
         });
     }
 }

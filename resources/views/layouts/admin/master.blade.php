@@ -50,14 +50,14 @@
 </section>
 
 <!-- javascripts -->
-<script src="js/jquery-1.8.3.min.js"></script>
+<script src="{{asset('admin/js/jquery-1.8.3.min.js')}}"></script>
 <!-- bootstrap -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{{asset('admin/js/bootstrap.min.js')}}"></script>
 <!-- nice scroll -->
-<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="{{asset('admin/js/jquery.nicescroll.js')}}"></script>
 
 <!--custome script for all page-->
-<script src="js/scripts.js"></script>
+<script src="{{asset('admin/js/scripts.js')}}"></script>
 
 </body>
 </html>
