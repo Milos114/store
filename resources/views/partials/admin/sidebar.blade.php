@@ -15,7 +15,7 @@
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
-                    <li><a class="" href="/admin/products">List Product</a></li>
+                    <li><a class="" href="/admin/products">Products List</a></li>
                     <li><a class="" href="form_component.html">Create Product</a></li>
                     <li><a class="" href="form_validation.html">Edit Product</a></li>
                 </ul>
