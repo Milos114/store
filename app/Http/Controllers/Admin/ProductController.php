@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Requests\ProductEdit;
+use App\Http\Requests\ProductEditRequest;
 use App\Product;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -73,13 +75,15 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ProductEditRequest $request
+     * @param Product $product
+     * @return array
      */
-    public function update(Request $request, $id)
+    public function update(ProductEditRequest $request, Product $product)
     {
-        //
+        $product->fillIn($request->all());
+
+        return back()->with('status', 'Successfully updated');
     }
 
     /**

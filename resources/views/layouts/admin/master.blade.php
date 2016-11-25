@@ -42,7 +42,11 @@
 
     <!--main content start-->
     <section id="main-content">
+
         <section class="wrapper">
+            @include('partials.flash.errors')
+            @include('partials.flash.status')
+
             @yield('content')
         </section>
     </section>
