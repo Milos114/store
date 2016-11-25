@@ -46,7 +46,6 @@ class Product extends Model
      */
     private function updateTags($attributes)
     {
-        $tagsArray = $attributes['tags'] ?? [];
-        $this->tags()->sync($tagsArray);
+        $this->tags()->sync($attributes['tags'] ?? []);
     }
 }
