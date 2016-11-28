@@ -38,14 +38,40 @@ class Product extends Model
     {
         $this->update($attributes);
 
-        $this->updateTags($attributes);
+        $this->updateTags($attributes['tags'] ?? []);
+
+        if (isset($attributes['image'])) {
+            $this->saveImage($attributes['image']);
+        }
     }
 
     /**
-     * @param $attributes
+     * @param array $tags
      */
-    private function updateTags($attributes)
+    private function updateTags($tags)
     {
-        $this->tags()->sync($attributes['tags'] ?? []);
+        $this->tags()->sync($tags);
+    }
+
+    /**
+     * @param \Illuminate\Http\UploadedFile $images
+     */
+    private function saveImage($images)
+    {
+        foreach ($images as $image) {
+            $image->storeAs('product', auth()->user()->id . '/' . uniqid() . $this->sanitizedName($image));
+        }
+    }
+
+    /**
+     * @param  $image
+     * @return string
+     */
+    private function sanitizedName($image)
+    {
+        $name = str_slug(pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME), '_');
+        $ext = str_slug((pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION)));
+
+        return $name . '.' . $ext;
     }
 }
