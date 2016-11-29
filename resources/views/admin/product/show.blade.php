@@ -54,6 +54,11 @@
 
                 </tbody>
             </table>
+            <div class="btn-group pull-left">
+                <a href="{{action('Admin\ProductController@edit', [$product->id])}}">
+                    <button type="button" class="btn btn-primary">Edit this product</button>
+                </a>
+            </div>
         </div>
     </div>
 
