@@ -11,6 +11,7 @@
                 <div class="form-group">
                     <label for="category_id">Category:</label>
                     <select name="category_id" class="form-control">
+                        <option >Select Category...</option>
                         @foreach($categories as $category)
                             <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                         @endforeach
@@ -32,8 +33,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image">Price:</label>
-                    <input type="text" class="form-control" name="price" {{old('price')}}>
+                    <label for="price">Price:</label>
+                    <input type="text" class="form-control" name="price" value="{{old('price')}}">
                 </div>
 
                 <div class="form-group">

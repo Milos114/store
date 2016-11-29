@@ -32,4 +32,11 @@ class ProductStoreRequest extends FormRequest
             'image' => 'image',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'category_id.numeric' => 'Please select category'
+        ];
+    }
 }
