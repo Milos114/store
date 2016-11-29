@@ -11,7 +11,7 @@ trait ImageTrait
     private function saveImage($images)
     {
         foreach ($images as $image) {
-            $image->storeAs('product', auth()->user()->id . '/' . uniqid() . $this->sanitizedName($image));
+            $image->storeAs('product', $this->id . '/' . uniqid() . $this->sanitizedName($image));
         }
     }
 

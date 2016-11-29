@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
 
             $table->string('title');
             $table->text('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('price');
             $table->text('product_details');
             $table->timestamps();

@@ -12,18 +12,18 @@
                     <label for="category_id">Category:</label>
                     <select name="category_id" class="form-control">
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input type="text" class="form-control" name="title" value="">
+                    <input type="text" class="form-control" name="title" value="{{old('title')}}">
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea class="form-control" rows="10" name="description"></textarea>
+                    <textarea class="form-control" rows="10" name="description">{{old('description')}}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -33,12 +33,12 @@
 
                 <div class="form-group">
                     <label for="image">Price:</label>
-                    <input type="text" class="form-control" name="price" value="">
+                    <input type="text" class="form-control" name="price" {{old('price')}}>
                 </div>
 
                 <div class="form-group">
                     <label for="product_details">Product Details:</label>
-                    <textarea class="form-control" rows="5" name="product_details"></textarea>
+                    <textarea class="form-control" rows="5" name="product_details">{{old('product_details')}}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -46,7 +46,8 @@
                     @foreach($tags as $tag)
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags">
+                                <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags"
+                                {{is_array(old('tags')) && in_array($tag->id, old('tags')) ? 'checked' : ''}}>
                                 {{$tag->name}}
                             </label>
                         </div>

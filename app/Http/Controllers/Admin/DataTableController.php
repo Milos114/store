@@ -21,7 +21,7 @@ class DataTableController extends Controller
             ->addColumn('edit', function ($product) {
                 return '<a href="/admin/product/' . $product->id . '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             })->addColumn('delete', function ($product) {
-                return '<a href="/admin/product/' . $product->id . '/delete" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-delete"></i> Delete</a>';
+                return '<a href="/admin/product/' . $product->id . '/delete" class="btn btn-xs btn-primary" onclick="return confirm(\'Are you sure?\')"><i class="glyphicon glyphicon-delete"></i> Delete</a>';
             })
             ->make(true);
     }

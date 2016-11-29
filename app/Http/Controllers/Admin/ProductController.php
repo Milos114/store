@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Requests\ProductEdit;
 use App\Http\Requests\ProductEditRequest;
+use App\Http\Requests\ProductStoreRequest;
 use App\Product;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -29,18 +30,24 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::get(['id', 'name']);
+        $tags = Tag::all();
+
+        return view('admin.product.create', compact('product', 'categories', 'tags'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ProductStoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        //
+        $product = Product::create($request->all());
+        $product->fillIn($request->all());
+
+        return back()->with('status', 'Successfully created');
     }
 
     /**
@@ -62,10 +69,6 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-//        $product = Product::with('category', 'tags')
-//            ->where('id', $product->id)
-//            ->first();
-
         $categories = Category::get(['id', 'name']);
         $tags = Tag::all();
 
@@ -89,11 +92,13 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return string
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-       return 'fdsf';
+        $product->deleteProduct();
+
+        return back()->with('status', 'Successfully deleted');
     }
 }

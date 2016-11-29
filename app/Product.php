@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -38,9 +39,11 @@ class Product extends Model
      */
     public function fillIn($attributes)
     {
-        $this->update($attributes);
+        if ($this->exists) {
+            $this->update($attributes);
+        }
 
-        $this->updateTags($attributes['tags'] ?? []);
+        $this->storeTags($attributes['tags'] ?? []);
 
         if (isset($attributes['image'])) {
             $this->saveImage($attributes['image']);
@@ -50,9 +53,15 @@ class Product extends Model
     /**
      * @param array $tags
      */
-    private function updateTags($tags)
+    private function storeTags($tags)
     {
         $this->tags()->sync($tags);
+    }
+
+    public function deleteProduct()
+    {
+        $this->delete();
+        Storage::deleteDirectory('product/' . $this->id);
     }
 
 }
