@@ -1,8 +1,8 @@
 @extends('layouts.admin.master')
 
 @section('content')
-    <div class="">
-        <div class="">
+    <div class="container" style="margin: 20px">
+        <div class="row">
 
             <h2>Show the Product</h2>
 
@@ -61,5 +61,10 @@
             </div>
         </div>
     </div>
+    <form action="/file-upload"
+          class="dropzone"
+          id="my-awesome-dropzone">
+    </form>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
 @stop
