@@ -29,10 +29,15 @@ class ProductStoreRequest extends FormRequest
             'description' => 'required',
             'price' => 'required|numeric',
             'product_details' => 'required',
-            'image' => 'image',
+            'image[]' => 'mimes:jpeg,bmp,png',
         ];
     }
 
+    /**
+     * Custom messages
+     *
+     * @return array
+     */
     public function messages()
     {
         return [

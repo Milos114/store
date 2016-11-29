@@ -26,6 +26,7 @@
                     <th class="col-md-3">Title</th>
                     <th class="col-md-3">Price</th>
                     <th class="col-md-3">Created At</th>
+                    <th class="col-md-3">Show</th>
                     <th class="col-md-3">Edit</th>
                     <th class="col-md-3">Delete</th>
                 </tr>
@@ -43,6 +44,7 @@
                 {data: 'title', name: 'title'},
                 {data: 'price', name: 'price'},
                 {data: 'created_at', name: 'created_at'},
+                {data: 'show', name: 'show', orderable: false, searchable: false},
                 {data: 'edit', name: 'edit', orderable: false, searchable: false},
                 {data: 'delete', name: 'delete', orderable: false, searchable: false}
             ]
