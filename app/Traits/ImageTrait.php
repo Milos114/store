@@ -8,11 +8,16 @@ trait ImageTrait
     /**
      * @param \Illuminate\Http\UploadedFile $images
      */
-    private function saveImage($images)
+    public function saveImage($images)
     {
-        foreach ($images as $image) {
-            $image->storeAs('public', $this->id . '/' . uniqid() . $this->sanitizedName($image));
+        if (is_array($images)) {
+            foreach ($images as $image) {
+                $image->storeAs('public', $this->id . '/' . uniqid() . $this->sanitizedName($image));
+            }
+            return;
         }
+
+        $images->storeAs('public', $this->id . '/' . uniqid() . $this->sanitizedName($images));
     }
 
     /**

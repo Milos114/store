@@ -62,9 +62,14 @@ class Product extends Model
     public function deleteProduct()
     {
         $this->delete();
-        Storage::deleteDirectory('product/' . $this->id);
+        Storage::deleteDirectory('public/' . $this->id);
     }
 
+    /**
+     * Get images base name
+     *
+     * @return array
+     */
     public function images()
     {
         $images = File::files(public_path('storage/' . $this->id));

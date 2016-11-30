@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('content')
-    <div class="container" style="margin: 20px">
+    <div class="" style="margin: 20px">
         <div class="row">
 
             <h2>Show the Product</h2>
@@ -54,23 +54,30 @@
 
                 </tbody>
             </table>
-            <div class="btn-group pull-left">
+            <div class="btn-group pull-right">
                 <a href="{{action('Admin\ProductController@edit', [$product->id])}}">
                     <button type="button" class="btn btn-primary">Edit this product</button>
+                </a>
+            </div>
+
+            <div class="btn-group pull-left">
+                <a href="{{action('Admin\ProductController@index')}}">
+                    <button type="button" class="btn btn-block">Back to products</button>
                 </a>
             </div>
         </div>
     </div>
 
-    @foreach($images as $image)
-        <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image">
-        <a href="/delete/{{$image}}">Delete</a>
-    @endforeach
-
-    <form action="/file-upload"
+    <form action="{{action('Admin\ProductController@productImage', [$product->id])}}"
           class="dropzone"
           id="my-awesome-dropzone">
+        {{csrf_field()}}
     </form>
+
+    @foreach($images as $image)
+        <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image" style="width: 200px">
+        <a href="/delete/{{$image}}">Delete</a>
+    @endforeach
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
 @stop

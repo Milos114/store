@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
-use App\Http\Requests\ProductEdit;
 use App\Http\Requests\ProductEditRequest;
 use App\Http\Requests\ProductStoreRequest;
 use App\Product;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -105,5 +102,10 @@ class ProductController extends Controller
         $product->deleteProduct();
 
         return back()->with('status', 'Successfully deleted');
+    }
+
+    public function productImage(Request $request, Product $product)
+    {
+        $product->saveImage($request->file('file'));
     }
 }
