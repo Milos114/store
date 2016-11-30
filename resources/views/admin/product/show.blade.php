@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('content')
-    <div class="" style="margin: 20px">
+    <div class="container">
         <div class="row">
 
             <h2>Show the Product</h2>
@@ -65,19 +65,24 @@
                     <button type="button" class="btn btn-block">Back to products</button>
                 </a>
             </div>
-        </div>
-    </div>
 
-    <form action="{{action('Admin\ProductController@productImage', [$product->id])}}"
-          class="dropzone"
-          id="my-awesome-dropzone">
-        {{csrf_field()}}
-    </form>
+
+            <div style="padding-top: 40px">
+                <form action="{{action('Admin\ProductController@productImage', [$product->id])}}"
+                      class="dropzone"
+                      id="my-awesome-dropzone">
+                    {{csrf_field()}}
+                </form>
+            </div>
+
 
     @foreach($images as $image)
         <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image" style="width: 200px">
         <a href="/delete/{{$image}}">Delete</a>
     @endforeach
+
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
 @stop
