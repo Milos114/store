@@ -61,14 +61,16 @@
             </div>
         </div>
     </div>
+
+    @foreach($images as $image)
+        <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image">
+        <a href="/delete/{{$image}}">Delete</a>
+    @endforeach
+
     <form action="/file-upload"
           class="dropzone"
           id="my-awesome-dropzone">
     </form>
-
-    @foreach($images as $image)
-        <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="image">
-    @endforeach
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
 @stop
