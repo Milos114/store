@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -62,6 +63,18 @@ class Product extends Model
     {
         $this->delete();
         Storage::deleteDirectory('product/' . $this->id);
+    }
+
+    public function images()
+    {
+        $images = File::files(public_path('storage/' . $this->id));
+
+        $photoBaseName = [];
+        foreach ($images as $photo) {
+            $photoBaseName[] = pathinfo($photo, PATHINFO_BASENAME);
+        }
+
+        return $photoBaseName;
     }
 
 }

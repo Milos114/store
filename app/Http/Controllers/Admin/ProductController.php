@@ -10,6 +10,8 @@ use App\Product;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -58,9 +60,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $images = $product->images();
         $tagNames = $product->tags()->pluck('name');
 
-        return view('admin.product.show', compact('product', 'tagNames'));
+        return view('admin.product.show', compact('product', 'tagNames', 'images'));
     }
 
     /**
