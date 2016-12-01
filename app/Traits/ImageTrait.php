@@ -44,12 +44,9 @@ trait ImageTrait
     {
         $images = File::files(public_path('storage/' . $this->id));
 
-        $imageBaseName = [];
-        foreach ($images as $image) {
-            $imageBaseName[] = pathinfo($image, PATHINFO_BASENAME);
-        }
-
-        return $imageBaseName;
+        return array_map(function ($image) {
+            return pathinfo($image, PATHINFO_BASENAME);
+        }, $images);
     }
 
     /**
