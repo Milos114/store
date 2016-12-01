@@ -66,5 +66,6 @@
 <!--custome script for all page-->
 <script src="{{asset('admin/js/scripts.js')}}"></script>
 
+<div style="height: 200px"></div>
 </body>
 </html>

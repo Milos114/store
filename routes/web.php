@@ -37,4 +37,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('product/{product}/delete', 'Admin\ProductController@destroy');
 
     Route::post('product-image-upload/{product}', 'Admin\ProductController@productImage');
+    Route::post('delete-product-image/{product}', 'Admin\ProductController@deleteImage');
 });

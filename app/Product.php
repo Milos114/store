@@ -82,4 +82,14 @@ class Product extends Model
         return $photoBaseName;
     }
 
+    /**
+     * @param $images
+     */
+    public function deleteImages($images)
+    {
+        foreach ($images as $image) {
+            Storage::delete('public/' . $this->id . '/' . $image);
+        }
+    }
+
 }

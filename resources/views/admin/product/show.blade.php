@@ -1,8 +1,8 @@
 @extends('layouts.admin.master')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+    <div class="">
+        <div class="">
 
             <h2>Show the Product</h2>
 
@@ -54,34 +54,42 @@
 
                 </tbody>
             </table>
-            <div class="btn-group pull-right">
-                <a href="{{action('Admin\ProductController@edit', [$product->id])}}">
-                    <button type="button" class="btn btn-primary">Edit this product</button>
-                </a>
-            </div>
-
-            <div class="btn-group pull-left">
-                <a href="{{action('Admin\ProductController@index')}}">
-                    <button type="button" class="btn btn-block">Back to products</button>
-                </a>
-            </div>
-
-
-            <div style="padding-top: 40px">
-                <form action="{{action('Admin\ProductController@productImage', [$product->id])}}"
-                      class="dropzone"
-                      id="my-awesome-dropzone">
-                    {{csrf_field()}}
-                </form>
-            </div>
-
-
-    @foreach($images as $image)
-        <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image" style="width: 200px">
-        <a href="/delete/{{$image}}">Delete</a>
-    @endforeach
-
         </div>
+    </div><hr>
+
+    <form method="post" action="{{action('Admin\ProductController@deleteImage', [$product->id])}}">
+          {{csrf_field()}}
+        <div>
+            <button type="submit" class="btn btn-danger pull-right">Delete</button>
+        </div>
+        @foreach($images as $image)
+            <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image" style="width: 200px">
+        <span>
+            <label for="images">Delete</label>
+            <input type="checkbox" value="{{$image}}" name="images[]">
+        </span>
+        @endforeach
+
+    </form>
+
+    <div style="padding:40px" >
+        <form action="{{action('Admin\ProductController@productImage', [$product->id])}}"
+              class="dropzone"
+              id="my-awesome-dropzone">
+            {{csrf_field()}}
+        </form>
+    </div>
+
+    <div class="btn-group pull-right">
+        <a href="{{action('Admin\ProductController@edit', [$product->id])}}">
+            <button type="button" class="btn btn-primary">Edit this product</button>
+        </a>
+    </div>
+
+    <div class="btn-group pull-left">
+        <a href="{{action('Admin\ProductController@index')}}">
+            <button type="button" class="btn btn-block">Back to products</button>
+        </a>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>

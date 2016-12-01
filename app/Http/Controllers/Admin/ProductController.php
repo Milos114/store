@@ -104,8 +104,24 @@ class ProductController extends Controller
         return back()->with('status', 'Successfully deleted');
     }
 
+    /**
+     * @param Request $request
+     * @param Product $product
+     */
     public function productImage(Request $request, Product $product)
     {
         $product->saveImage($request->file('file'));
+    }
+
+    /**
+     * @param  Product $product
+     * @param  Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteImage(Product $product, Request $request)
+    {
+        $product->deleteImages($request->get('images'));
+
+        return back();
     }
 }
