@@ -59,9 +59,12 @@
 
     <form method="post" action="{{action('Admin\ProductController@deleteImage', [$product->id])}}">
           {{csrf_field()}}
-        <div>
-            <button type="submit" class="btn btn-danger pull-right">Delete</button>
-        </div>
+        @if (count($images) > 0)
+            <div>
+                <button type="submit" class="btn btn-danger pull-right" id="delete" >Delete Selected Photos</button>
+            </div>
+        @endif
+
         @foreach($images as $image)
             <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image" style="width: 200px">
         <span>
