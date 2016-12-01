@@ -120,9 +120,7 @@ class ProductController extends Controller
      */
     public function deleteImage(Product $product, Request $request)
     {
-        if (count ($request->get('images')) > 0) {
-            $product->deleteImages($request->get('images'));
-        }
+        $product->deleteImages($request->get('images'));
 
         return back();
     }
