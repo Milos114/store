@@ -103,6 +103,8 @@
 
             if (checkCount > 0) {
                 $('#delete').prop('disabled', false);
+            } else {
+                $('#delete').prop('disabled', true);
             }
         });
 
