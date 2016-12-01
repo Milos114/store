@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 
 trait ImageTrait
 {
@@ -30,5 +33,32 @@ trait ImageTrait
         $ext = str_slug((pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION)));
 
         return $name . '.' . $ext;
+    }
+
+    /**
+     * Get images base name
+     *
+     * @return array
+     */
+    public function images()
+    {
+        $images = File::files(public_path('storage/' . $this->id));
+
+        $imageBaseName = [];
+        foreach ($images as $image) {
+            $imageBaseName[] = pathinfo($image, PATHINFO_BASENAME);
+        }
+
+        return $imageBaseName;
+    }
+
+    /**
+     * @param $images
+     */
+    public function deleteImages($images)
+    {
+        foreach ($images as $image) {
+            Storage::delete('public/' . $this->id . '/' . $image);
+        }
     }
 }
