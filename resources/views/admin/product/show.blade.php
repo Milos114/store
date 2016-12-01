@@ -61,7 +61,7 @@
           {{csrf_field()}}
         @if (count($images) > 0)
             <div>
-                <button type="submit" class="btn btn-danger pull-right" id="delete" >Delete Selected Photos</button>
+                <button type="submit" class="btn btn-danger pull-right" id="delete" disabled >Delete Selected Photos</button>
             </div>
         @endif
 
@@ -69,7 +69,7 @@
             <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image" style="width: 200px">
         <span>
             <label for="images">Delete</label>
-            <input type="checkbox" value="{{$image}}" name="images[]">
+            <input type="checkbox" value="{{$image}}" name="images[]" class="check">
         </span>
         @endforeach
 
@@ -96,4 +96,15 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+    <script>
+        $('.check').change(function () {
+            var checkCount = ($(":checkbox:checked").length);
+            console.log(checkCount);
+
+            if (checkCount > 0) {
+                $('#delete').prop('disabled', false);
+            }
+        });
+
+    </script>
 @stop

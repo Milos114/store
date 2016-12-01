@@ -29,6 +29,9 @@
     <!-- DropZone styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
 
+    <script src="{{asset('admin/js/jquery-1.8.3.min.js')}}"></script>
+
+
 </head>
 
 <body>
