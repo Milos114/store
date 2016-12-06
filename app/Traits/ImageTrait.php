@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 trait ImageTrait
 {
+    public $sanitizedName;
+
     /**
      * @param \Illuminate\Http\UploadedFile $images
      */
@@ -15,12 +17,17 @@ trait ImageTrait
     {
         if (is_array($images)) {
             foreach ($images as $image) {
-                $image->storeAs('public', $this->id . '/' . uniqid() . $this->sanitizedName($image));
+                $uniqueId = $this->uniqueString();
+                $image->storeAs('public', $this->id . '/' . $uniqueId . $this->sanitizedName($image));
+                $this->images()->create(['url' => $uniqueId . $this->sanitizedName]);
             }
             return;
         }
 
-        $images->storeAs('public', $this->id . '/' . uniqid() . $this->sanitizedName($images));
+        $uniqueId = $this->uniqueString();
+
+        $images->storeAs('public', $this->id . '/' . $uniqueId . $this->sanitizedName($images));
+        $this->images()->create(['url' => $uniqueId . $this->sanitizedName]);
     }
 
     /**
@@ -32,6 +39,7 @@ trait ImageTrait
         $name = str_slug(pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME), '_');
         $ext = str_slug((pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION)));
 
+        $this->sanitizedName = $name . '.' . $ext;
         return $name . '.' . $ext;
     }
 
@@ -40,7 +48,7 @@ trait ImageTrait
      *
      * @return array
      */
-    public function images()
+    public function getImages()
     {
         $images = File::files(public_path('storage/' . $this->id));
 
@@ -57,5 +65,14 @@ trait ImageTrait
         foreach ($images as $image) {
             Storage::delete('public/' . $this->id . '/' . $image);
         }
+        $this->images()->whereIn('url', $images)->delete();
+    }
+
+    /**
+     * @return string
+     */
+    public function uniqueString()
+    {
+        return uniqid();
     }
 }
