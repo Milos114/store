@@ -65,7 +65,7 @@
             </div>
         @endif
 
-        @foreach($product->images as $image)
+        @foreach($images->images as $image)
             <img src="{{asset('storage/' . $product->id . '/' . $image->url)}}" class="show-image" style="width: 200px">
         <span>
             <label for="images">Delete</label>

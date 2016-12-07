@@ -44,20 +44,6 @@ trait ImageTrait
     }
 
     /**
-     * Get images base name
-     *
-     * @return array
-     */
-    /*public function getImages()
-    {
-        $images = File::files(public_path('storage/' . $this->id));
-
-        return array_map(function ($image) {
-            return pathinfo($image, PATHINFO_BASENAME);
-        }, $images);
-    }*/
-
-    /**
      * @param $images
      */
     public function deleteImages($images)
@@ -65,6 +51,7 @@ trait ImageTrait
         foreach ($images as $image) {
             Storage::delete('public/' . $this->id . '/' . $image);
         }
+
         $this->images()->whereIn('url', $images)->delete();
     }
 

@@ -43,6 +43,13 @@ class Product extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function scopeProductImages()
+    {
+        return $this->with('images')
+            ->where('id', $this->id)
+            ->first();
+    }
+
     /**
      * @param array $attributes
      */
