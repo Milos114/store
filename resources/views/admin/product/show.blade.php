@@ -59,17 +59,17 @@
 
     <form method="post" action="{{action('Admin\ProductController@deleteImage', [$product->id])}}">
           {{csrf_field()}}
-        @if (count($images) > 0)
+        @if ($product->images()->count()> 0)
             <div>
                 <button type="submit" class="btn btn-danger pull-right" id="delete" disabled >Delete Selected Photos</button>
             </div>
         @endif
 
-        @foreach($images as $image)
-            <img src="{{asset('storage/' . $product->id . '/' . $image)}}" class="show-image" style="width: 200px">
+        @foreach($product->images as $image)
+            <img src="{{asset('storage/' . $product->id . '/' . $image->url)}}" class="show-image" style="width: 200px">
         <span>
             <label for="images">Delete</label>
-            <input type="checkbox" value="{{$image}}" name="images[]" class="check">
+            <input type="checkbox" value="{{$image->url}}" name="images[]" class="check">
         </span>
         @endforeach
 

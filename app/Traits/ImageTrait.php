@@ -48,14 +48,14 @@ trait ImageTrait
      *
      * @return array
      */
-    public function getImages()
+    /*public function getImages()
     {
         $images = File::files(public_path('storage/' . $this->id));
 
         return array_map(function ($image) {
             return pathinfo($image, PATHINFO_BASENAME);
         }, $images);
-    }
+    }*/
 
     /**
      * @param $images

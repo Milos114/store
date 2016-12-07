@@ -57,10 +57,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $images = $product->getImages();
         $tagNames = $product->tags()->pluck('name');
 
-        return view('admin.product.show', compact('product', 'tagNames', 'images'));
+        return view('admin.product.show', compact('product', 'tagNames'));
     }
 
     /**
