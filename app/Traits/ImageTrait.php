@@ -58,7 +58,7 @@ trait ImageTrait
     /**
      * @return string
      */
-    public function uniqueString()
+    private function uniqueString()
     {
         return uniqid();
     }
