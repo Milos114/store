@@ -11,12 +11,15 @@
 |
 */
 use App\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
-Route::get('get-product/{product}', function (Product $product) {
-    Redis::zincrby('trending_products', 1, $product);
 
-    return;
+
+Route::get('get-product/{product}', function (Product $product) {
+    Redis::zincrby('trending_products', 1, $product->id);
+
+    return $product;
 });
 
 Route::get('trending-products', function () {
@@ -27,15 +30,9 @@ Route::get('trending-products', function () {
 //    );
 //    dd($trendingProducts);
 
-    $decodedProducts = [];
-    foreach ($trendingProducts as $product) {
-        $decodedProducts[] = json_decode($product);
-    }
-//    dd($decodedProducts);
-
-    foreach ($decodedProducts as $decodedProduct) {
-        $models[] = new Product((array) $decodedProduct);
-    }
+    $models = array_map(function($productId) {
+        return Product::find($productId);
+    }, $trendingProducts);
     dd($models);
 });
 
@@ -65,4 +62,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 
     Route::post('product-image-upload/{product}', 'Admin\ProductController@productImage');
     Route::post('delete-product-image/{product}', 'Admin\ProductController@deleteImage');
+
+    Route::get('hashes', function () {
+
+        $id = Auth::id();
+        $userStats = [
+            'favourites' => 10,
+            'watchlaters' => 20,
+            'completions' => 30,
+        ];
+
+        Redis::hmset("user.$id.stats", $userStats);
+        Redis::hincrby("user.$id.stats", 'favourites', 23);
+        return Redis::hgetall("user.$id.stats");
+    });
 });
