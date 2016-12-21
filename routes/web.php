@@ -12,6 +12,7 @@
 */
 use App\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 
 
@@ -64,6 +65,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::post('delete-product-image/{product}', 'Admin\ProductController@deleteImage');
 
     Route::get('hashes', function () {
+        return Product::all();
 
         $id = Auth::id();
         $userStats = [
@@ -76,4 +78,25 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Redis::hincrby("user.$id.stats", 'favourites', 23);
         return Redis::hgetall("user.$id.stats");
     });
+    Route::get('caching', function () {
+        $products = Cache::remember('products.all', 1, function () {
+            return Product::all();
+        });
+
+        return $products;
+//        return remember('products.all', 60, function () {
+//            return Product::all();
+//        });
+    });
+
+    function remember($key, $minutes, Closure $callback) {
+        if ($value = Redis::get($key)) {
+            return json_decode($value);
+        }
+
+        Redis::setex($key, $minutes, $value = $callback());
+
+        return $value;
+
+    }
 });
